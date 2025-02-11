@@ -18,6 +18,8 @@ public class Tester {
 		java.teilnehmerHinzufuegen(baldus);
 		
 		java.setNote(riedel, 1.0);
+		java.getNote(riedel);
+		
 		java.getNotenListe();
 	}
 

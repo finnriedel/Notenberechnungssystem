@@ -6,6 +6,7 @@ import java.util.Map;
 public class Modul {
 	private String titel;
 	private Dozent dozent;
+	private int anzahlTeilnehmer;
 	private List<Student> teilnehmer;
 	private Map<Student, Double> notenListe;
 	
@@ -27,6 +28,11 @@ public class Modul {
 	
 	public void teilnehmerHinzufuegen(Student student) {
 		teilnehmer.add(student);
+		anzahlTeilnehmer++;
+	}
+	
+	public int getAnzahlTeilnehmer() {
+		return anzahlTeilnehmer;
 	}
 	
 	public void getTeilnehmer(){
@@ -41,9 +47,12 @@ public class Modul {
 		}
 	}
 	
-	public void getNotenListe() {
-		notenListe.forEach((student, note) ->
-			System.out.println(student.getVorname() + " " + student.getNachname() + " " + note));
+	public void getNote(Student student) {
+		System.out.println(student.getVorname() + " " + student.getNachname() + " " + notenListe.get(student));
+	}
+	
+	public Map<Student, Double> getNotenListe(){
+		return notenListe;
 	}
 }
 
