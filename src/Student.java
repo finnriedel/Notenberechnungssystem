@@ -12,7 +12,7 @@ public class Student extends Mensch{
 		return matrikelnummer;
 	}
 	
-	public void setNote(int note) {
+	public void setNote(double note) {
 		this.note = note;
 	}
 	
