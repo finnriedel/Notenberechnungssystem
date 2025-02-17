@@ -8,13 +8,13 @@ public class Modul {
 	private Dozent dozent;
 	private int anzahlTeilnehmer;
 	private List<Student> teilnehmer;
-	private Map<Student, Double> notenListe;
+
 	
 	public Modul(String titel, Dozent dozent) {
 		this.titel = titel;
 		this.dozent = dozent;
 		teilnehmer = new ArrayList<>();
-		notenListe = new HashMap<>();
+
 		
 	}
 	
@@ -41,18 +41,4 @@ public class Modul {
 		}
 	}
 	
-	public void setNote(Student student, double note) {
-		if(teilnehmer.contains(student)){
-			notenListe.put(student, note);
-		}
-	}
-	
-	public void getNote(Student student) {
-		System.out.println(student.getVorname() + " " + student.getNachname() + " " + notenListe.get(student));
-	}
-	
-	public Map<Student, Double> getNotenListe(){
-		return notenListe;
-	}
 }
-
