@@ -70,7 +70,7 @@ public class Notenberechnungssystem {
 		String nachname = Tools.stringEingabe();
 		Student tmpStudent = null;
 		for(int i = 0; i < kursListe.size(); i++) {
-			if(kursListe.get(i).getNachname() == nachname) {
+			if(kursListe.get(i).getNachname().equals(nachname)) {
 				tmpStudent = kursListe.get(i);
 			}
 		}
@@ -80,10 +80,12 @@ public class Notenberechnungssystem {
 			switch(Tools.stringEingabe()) {
 			case "j":  
 				System.out.println("Bitte geben Sie eine Note ein:");
-				if(Tools.doubleEingabe() < 0.0 || Tools.doubleEingabe() > 10.0) {
+				double tmpNote = Tools.doubleEingabe();
+				if(tmpNote < 0.0 || tmpNote > 10.0) {
 					System.out.println("Falsche eingabe, der Wert muss zwischen 0.0 und 10.0 liegen");
 				}else {
-					tmpStudent.setNote(Tools.doubleEingabe());
+					tmpStudent.setNote(tmpNote);
+					System.out.println("Note wurde vergeben");
 					}
 			case "n":
 				default:

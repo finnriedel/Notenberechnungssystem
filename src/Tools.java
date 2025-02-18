@@ -7,11 +7,10 @@ public class Tools{
     InputStreamReader daten = new InputStreamReader(System.in);
     BufferedReader eingeb = new BufferedReader(daten);
     try{
-      System.out.println("Ihre Eingabe (int): ");
       eingebs = eingeb.readLine();
 
     }catch (Exception e){
-    	System.out.println(" Falsche Eingabe ");
+    	System.out.println("Falsche Eingabe ");
     }
 
     int eingebi;
@@ -31,11 +30,10 @@ public class Tools{
     InputStreamReader daten = new InputStreamReader(System.in);
     BufferedReader eingeb = new BufferedReader(daten);
     try{
-      System.out.println("Ihre Eingabe (String): ");
       eingebs = eingeb.readLine();
 
     }catch (Exception e){
-    	System.out.println(" Falsche Eingabe ");
+    	System.out.println("Falsche Eingabe ");
     }
 
     return eingebs;
@@ -47,11 +45,10 @@ public class Tools{
 	  InputStreamReader daten = new InputStreamReader(System.in);
 	  BufferedReader eingeb = new BufferedReader(daten);
 	  try{
-		  System.out.println("Ihre Eingabe (double): ");
 		  eingebs = eingeb.readLine();
 
 	  }catch (Exception e){
-		  System.out.println(" Falsche Eingabe ");
+		  System.out.println("Falsche Eingabe ");
 	  }
 	  
 	  double eingebi=0;   
