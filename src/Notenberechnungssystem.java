@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class Notenberechnungssystem {
 	private List<Student> kursListe;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Notenberechnungssystem nbs = new Notenberechnungssystem();
 		nbs.dialog();
 	}
@@ -14,7 +15,7 @@ public class Notenberechnungssystem {
 		
 	}
 	
-	public void dialog() {
+	public void dialog() throws IOException {
 		while(true) {
 			System.out.println("Was möchtest du tun?");
 			System.out.println("1 - Student zu meinem Kurs hinzufügen");
@@ -32,7 +33,10 @@ public class Notenberechnungssystem {
 				break;
 				case 4: getKursliste();
 				break;
-				case 5:
+				case 5: 
+				break;
+				case 6: readFile();
+				break;
 				case 0: return;
 			}
 		}
@@ -96,11 +100,27 @@ public class Notenberechnungssystem {
 		
 	}
 	
-	public void getKursliste() {
+	public void getKursliste() throws FileNotFoundException {
+		PrintStream drucker = new PrintStream("/Users/finn/Developer/Lesbar.txt");
 		for(int i = 0; i < kursListe.size(); i++) {
 			System.out.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
+			drucker.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 		}
 	}
 		
+	
+	public void readFile() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/finn/Developer/Lesbar.txt"));
+		String zeile = reader.readLine();
+		while(zeile != null) {
+			System.out.println(zeile);
+			String array[] = zeile.split(" ");
+			Student tmpStudent = new Student(array[0], array[1], 1);
+			tmpStudent.setNote(Double.parseDouble(array[2]));
+			kursListe.add(tmpStudent);
+			zeile = reader.readLine();
+		}
+		reader.close();
+	}
 
 }
