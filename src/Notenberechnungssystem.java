@@ -17,11 +17,14 @@ public class Notenberechnungssystem {
 	
 	public void dialog() throws IOException {
 		while(true) {
-			System.out.println("Was möchtest du tun?");
-			System.out.println("1 - Student zu meinem Kurs hinzufügen");
-			System.out.println("2 - Notendurchschnitt anzeigen");
-			System.out.println("3 - Note verändern/eintragen");
-			System.out.println("4 - Notenübersicht drucken");
+			System.out.println("-------------------MENÜ-------------------");
+			System.out.println("| Was möchtest du tun?                   |");
+			System.out.println("| 1 - Student zu meinem Kurs hinzufügen  |");
+			System.out.println("| 2 - Notendurchschnitt anzeigen         |");
+			System.out.println("| 3 - Note verändern/eintragen           |");
+			System.out.println("| 4 - Notenübersicht drucken             |");
+			System.out.println("| 5 - Kursliste importieren (Datei)      |");
+			System.out.println("------------------------------------------");
 	
 			
 			switch(Tools.intEingabe()){
@@ -33,9 +36,7 @@ public class Notenberechnungssystem {
 				break;
 				case 4: getKursliste();
 				break;
-				case 5: 
-				break;
-				case 6: readFile();
+				case 5: readFile();
 				break;
 				case 0: return;
 			}
@@ -52,7 +53,6 @@ public class Notenberechnungssystem {
 		Student tmpStudent = new Student(vorname, nachname, matrikelnr);
 		kursListe.add(tmpStudent);
 		System.out.println("Student erfolgreich hinzugefügt.");
-		System.out.println("--------------------------------");
 	}
 	
 	public void notendurchschnittBerechnen() {
@@ -62,10 +62,8 @@ public class Notenberechnungssystem {
 				notenKummuliert = notenKummuliert + kursListe.get(i).getNote();
 			}
 			System.out.println("Der Notendurchschnitt in diesem Kurs beträgt: " + notenKummuliert/kursListe.size());
-			System.out.println("--------------------------------");
 		}else {
 			System.out.println("Es sind noch keine Studenten in Ihrem Kurs, bitte fügen Sie zuerst welche hinzu.");
-			System.out.println("--------------------------------");
 		}
 	}
 	
@@ -113,13 +111,13 @@ public class Notenberechnungssystem {
 		BufferedReader reader = new BufferedReader(new FileReader("/Users/finn/Developer/Lesbar.txt"));
 		String zeile = reader.readLine();
 		while(zeile != null) {
-			System.out.println(zeile);
 			String array[] = zeile.split(" ");
 			Student tmpStudent = new Student(array[0], array[1], 1);
 			tmpStudent.setNote(Double.parseDouble(array[2]));
 			kursListe.add(tmpStudent);
 			zeile = reader.readLine();
 		}
+		System.out.println("Datei wurde erfolgreich eingelesen.");
 		reader.close();
 	}
 
