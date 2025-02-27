@@ -5,6 +5,11 @@ import java.io.*;
 public class Notenberechnungssystem {
 	private List<Student> kursListe;
 	
+	
+	/*
+	 * In der Main-Methode wird eine neues Objekt erzeugt, an dem die Methoden aufgerufen werden.
+	 * Das hat den Grund, dass die Main-Methode static ist und ansonsten nicht mit non-static Methoden arbeiten kann.
+	 */
 	public static void main(String[] args) throws IOException {
 		Notenberechnungssystem nbs = new Notenberechnungssystem();
 		nbs.dialog();
@@ -15,6 +20,16 @@ public class Notenberechnungssystem {
 		
 	}
 	
+	/*
+	 * Die Methode Dialog steuert die weiteren Methoden dieser Klasse.
+	 * Die Optionen werden auf der Konsole ausgegeben und können anhand der Nummer gestartet werden.
+	 * Dafür ließt ein InputReader der Klasse Tools die Konsoleneingabe aus und überprüft den Wert.
+	 * Durch die while(true) Methode, wird das Menü nach jedem Methodenaufruf automatisch wieder gestartet, solange bis man per Eingabe 99
+	 * das Programm beendet.
+	 * Switch-Case interpretiert den Int-Wert und startet die entsprechende Methode, der default-Wert deckt alle 
+	 * anderen Fälle ab und weist einen auf den Fehler hin.
+	 * 
+	 */
 	public void dialog() throws IOException {
 		while(true) {
 			System.out.println("-------------------MENÜ-------------------");
@@ -24,6 +39,7 @@ public class Notenberechnungssystem {
 			System.out.println("| 3 - Note verändern/eintragen           |");
 			System.out.println("| 4 - Notenübersicht drucken             |");
 			System.out.println("| 5 - Kursliste importieren (Datei)      |");
+			System.out.println("| 99 - Programm schließen                |");
 			System.out.println("------------------------------------------");
 	
 			
@@ -39,6 +55,7 @@ public class Notenberechnungssystem {
 				case 5: readFile();
 				break;
 				case 99: return;
+				default: System.out.println("Diese Option ist nicht vorhanden.");
 			}
 		}
 	}
@@ -48,15 +65,18 @@ public class Notenberechnungssystem {
 		String vorname = Tools.stringEingabe();
 		System.out.println("Nachnamen eingeben:");
 		String nachname = Tools.stringEingabe();
+		// ^^ hier wird die Eingabe in einer lokalen Variable zwischengespeichert
 		System.out.println("Matrikelnummer eingeben:");
 		int matrikelnr = Tools.intEingabe();
 		while(matrikelnr == 0) {
 			System.out.println("Bitte gib eine ganze Zahl ein, die ungleich 0 ist.");
 			matrikelnr = Tools.intEingabe();
 		}
+		// ^^ Die while-Schleife ist notwendig, da die Tools-Klasse bei einer fehlerhaften Eingabe automatisch den Rückgabewert auf 0 setzt.
 		Student tmpStudent = new Student(vorname, nachname, matrikelnr);
 		kursListe.add(tmpStudent);
 		System.out.println("Student erfolgreich hinzugefügt.");
+		// ^^ Student wird erstellt, der Liste hinzugefügt und der Nutzer wird darüber informiert.
 	}
 	
 	public void notendurchschnittBerechnen() {
@@ -66,6 +86,9 @@ public class Notenberechnungssystem {
 				notenKummuliert = notenKummuliert + kursListe.get(i).getNote();
 			}
 			System.out.println("Der Notendurchschnitt in diesem Kurs beträgt: " + notenKummuliert/kursListe.size());
+			// ^^ Berechnung nur wenn Schülerliste gefüllt ist. 
+			// For-Schleife durchläuft alle Studentenobjekte der Liste und führt die Methode getNote() an jedem Objekt aus
+			// Dies wird in einer lokalen Variable zwischengespeichert und addiert mit jeder neuen Note und am Ende durch die Teilnehmeranzahl dividiert.
 		}else {
 			System.out.println("Es sind noch keine Studenten in Ihrem Kurs, bitte fügen Sie zuerst welche hinzu.");
 		}
@@ -79,22 +102,25 @@ public class Notenberechnungssystem {
 			if(kursListe.get(i).getNachname().equals(nachname)) {
 				tmpStudent = kursListe.get(i);
 			}
+			//Studentenliste wird durchlaufen und jeder Nachname wird mit dem gesuchten Nachnamen abgeglichen.
 		}
 		if(tmpStudent != null) {
 			System.out.println("Aktuell hat der Student " + tmpStudent.getVorname() + tmpStudent.getNachname() + " die Note: " + tmpStudent.getNote());
+			// Wenn ein Student gefunden wurde, dann wird die aktuell Note ausgegeben
 			System.out.println("Soll diese Verändert werden? [J/N]");
 			switch(Tools.stringEingabe()) {
-			case "j":  
-				System.out.println("Bitte geben Sie eine Note ein:");
-				double tmpNote = Tools.doubleEingabe();
-				if(tmpNote < 0.0 || tmpNote > 10.0) {
-					System.out.println("Falsche eingabe, der Wert muss zwischen 0.0 und 10.0 liegen");
-				}else {
-					tmpStudent.setNote(tmpNote);
-					System.out.println("Note wurde vergeben");
-					}
-			case "n":
-				default:
+				case "j":  
+					System.out.println("Bitte geben Sie eine Note ein:");
+					double tmpNote = Tools.doubleEingabe();
+					if(tmpNote < 0.0 || tmpNote > 10.0) {
+						System.out.println("Falsche eingabe, der Wert muss zwischen 0.0 und 10.0 liegen");
+					}else {
+						tmpStudent.setNote(tmpNote);
+						System.out.println("Note wurde vergeben");
+						}
+					//^^ Nur bei eingabe einer Validen Note wird der Wert gespeichert.
+				case "n":
+				default: return;
 			}
 		}else {
 			System.out.println("Dieser Student konnte nicht gefunden werden.");
