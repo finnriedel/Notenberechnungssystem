@@ -11,7 +11,6 @@ public class Tools{
 
     }catch (Exception e){
     	System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
-    	intEingabe();
     }
 
     int eingebi;
@@ -20,9 +19,8 @@ public class Tools{
     }catch (Exception e){
     	System.out.println("Eingabe Inkorrekt, die Eingabe muss eine ganze Zahl sein. Bitte versuche es erneut:");
     	eingebi = 0;
-    	intEingabe();
     }
-    
+
     return eingebi;
   }
   
@@ -36,7 +34,6 @@ public class Tools{
 
     }catch (Exception e){
     	System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
-    	stringEingabe();
     }
 
     return eingebs;
@@ -52,7 +49,6 @@ public class Tools{
 
 	  }catch (Exception e){
 		  System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
-		  doubleEingabe();
 	  }
 	  
 	  double eingebi=0;   
@@ -60,7 +56,6 @@ public class Tools{
 		  eingebi = Double.parseDouble(eingebs);
 	  }catch (Exception e){
 		  System.out.println("Eingabe Inkorrekt, bitte gib eine Kommazahl (mit Punkt, nicht Komma) an. Bitte versuche es erneut:");
-		  doubleEingabe();
 	  }
 	  return eingebi;
   }

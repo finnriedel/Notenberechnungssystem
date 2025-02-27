@@ -38,7 +38,7 @@ public class Notenberechnungssystem {
 				break;
 				case 5: readFile();
 				break;
-				case 0: return;
+				case 99: return;
 			}
 		}
 	}
@@ -50,6 +50,10 @@ public class Notenberechnungssystem {
 		String nachname = Tools.stringEingabe();
 		System.out.println("Matrikelnummer eingeben:");
 		int matrikelnr = Tools.intEingabe();
+		while(matrikelnr == 0) {
+			System.out.println("Bitte gib eine ganze Zahl ein, die ungleich 0 ist.");
+			matrikelnr = Tools.intEingabe();
+		}
 		Student tmpStudent = new Student(vorname, nachname, matrikelnr);
 		kursListe.add(tmpStudent);
 		System.out.println("Student erfolgreich hinzugefügt.");
