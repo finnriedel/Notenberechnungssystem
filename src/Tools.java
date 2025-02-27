@@ -10,15 +10,17 @@ public class Tools{
       eingebs = eingeb.readLine();
 
     }catch (Exception e){
-    	System.out.println("Falsche Eingabe ");
+    	System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
+    	intEingabe();
     }
 
     int eingebi;
     try {
     	eingebi = Integer.valueOf(eingebs).intValue();
     }catch (Exception e){
-    	System.out.println("!! Leider keine Zahl eingeben, Wert = 0 !!");
+    	System.out.println("Eingabe Inkorrekt, die Eingabe muss eine ganze Zahl sein. Bitte versuche es erneut:");
     	eingebi = 0;
+    	intEingabe();
     }
     
     return eingebi;
@@ -33,7 +35,8 @@ public class Tools{
       eingebs = eingeb.readLine();
 
     }catch (Exception e){
-    	System.out.println("Falsche Eingabe ");
+    	System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
+    	stringEingabe();
     }
 
     return eingebs;
@@ -48,14 +51,16 @@ public class Tools{
 		  eingebs = eingeb.readLine();
 
 	  }catch (Exception e){
-		  System.out.println("Falsche Eingabe ");
+		  System.out.println("Falsche Eingabe. Bitte versuche es erneut:");
+		  doubleEingabe();
 	  }
 	  
 	  double eingebi=0;   
 	  try {
 		  eingebi = Double.parseDouble(eingebs);
 	  }catch (Exception e){
-		  System.out.println("Bitte eine Flie�kommazahl eingeben (mit Punkt - kein Komma)");
+		  System.out.println("Eingabe Inkorrekt, bitte gib eine Kommazahl (mit Punkt, nicht Komma) an. Bitte versuche es erneut:");
+		  doubleEingabe();
 	  }
 	  return eingebi;
   }

@@ -101,8 +101,8 @@ public class Notenberechnungssystem {
 	public void getKursliste() throws FileNotFoundException {
 		PrintStream drucker = new PrintStream("/Users/finn/Developer/Lesbar.txt");
 		for(int i = 0; i < kursListe.size(); i++) {
-			System.out.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
-			drucker.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
+			System.out.println(kursListe.get(i).getVorname() + " £" + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
+			drucker.println(kursListe.get(i).getMatrikelnummer() + " " + kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 		}
 	}
 		
