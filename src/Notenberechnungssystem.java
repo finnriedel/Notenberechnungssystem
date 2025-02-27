@@ -32,6 +32,7 @@ public class Notenberechnungssystem {
 	 */
 	public void dialog() throws IOException {
 		while(true) {
+			System.out.println("");
 			System.out.println("-------------------MENÜ-------------------");
 			System.out.println("| Was möchtest du tun?                   |");
 			System.out.println("| 1 - Student zu meinem Kurs hinzufügen  |");
@@ -41,6 +42,7 @@ public class Notenberechnungssystem {
 			System.out.println("| 5 - Kursliste importieren (Datei)      |");
 			System.out.println("| 99 - Programm schließen                |");
 			System.out.println("------------------------------------------");
+			System.out.println("");
 	
 			
 			switch(Tools.intEingabe()){
@@ -105,7 +107,7 @@ public class Notenberechnungssystem {
 			//Studentenliste wird durchlaufen und jeder Nachname wird mit dem gesuchten Nachnamen abgeglichen.
 		}
 		if(tmpStudent != null) {
-			System.out.println("Aktuell hat der Student " + tmpStudent.getVorname() + tmpStudent.getNachname() + " die Note: " + tmpStudent.getNote());
+			System.out.println("Aktuell hat der Student " + tmpStudent.getVorname() + " " + tmpStudent.getNachname() + " die Note: " + tmpStudent.getNote());
 			// Wenn ein Student gefunden wurde, dann wird die aktuell Note ausgegeben
 			System.out.println("Soll diese Verändert werden? [J/N]");
 			switch(Tools.stringEingabe()) {
@@ -129,21 +131,25 @@ public class Notenberechnungssystem {
 	}
 	
 	public void getKursliste() throws FileNotFoundException {
-		PrintStream drucker = new PrintStream("/Users/finn/Developer/Lesbar.txt");
+		System.out.println("Bitte geben Sie den vollständigen Dateipfad und die Datei an: (zum Beispiel: /Users/finn/Developer/Lesbar.txt)");
+		String dateiPfad = Tools.stringEingabe();
+		PrintStream drucker = new PrintStream(dateiPfad);
 		for(int i = 0; i < kursListe.size(); i++) {
-			System.out.println(kursListe.get(i).getVorname() + " £" + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
+			System.out.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 			drucker.println(kursListe.get(i).getMatrikelnummer() + " " + kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 		}
 	}
 		
 	
 	public void readFile() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("/Users/finn/Developer/Lesbar.txt"));
+		System.out.println("Bitte geben Sie den vollständigen Dateipfad und die Datei an: (zum Beispiel: /Users/finn/Developer/Lesbar.txt)");
+		String dateiPfad = Tools.stringEingabe();
+		BufferedReader reader = new BufferedReader(new FileReader(dateiPfad));
 		String zeile = reader.readLine();
 		while(zeile != null) {
 			String array[] = zeile.split(" ");
-			Student tmpStudent = new Student(array[0], array[1], 1);
-			tmpStudent.setNote(Double.parseDouble(array[2]));
+			Student tmpStudent = new Student(array[1], array[2], Integer.parseInt(array[0]));
+			tmpStudent.setNote(Double.parseDouble(array[3]));
 			kursListe.add(tmpStudent);
 			zeile = reader.readLine();
 		}
