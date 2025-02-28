@@ -134,10 +134,13 @@ public class Notenberechnungssystem {
 		System.out.println("Bitte geben Sie den vollständigen Dateipfad und die Datei an: (zum Beispiel: /Users/finn/Developer/Lesbar.txt)");
 		String dateiPfad = Tools.stringEingabe();
 		PrintStream drucker = new PrintStream(dateiPfad);
+		// Dateipfad wird über Konsole abgefragt und neue Datei wird an dieser Stelle erstellt.
 		for(int i = 0; i < kursListe.size(); i++) {
 			System.out.println(kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 			drucker.println(kursListe.get(i).getMatrikelnummer() + " " + kursListe.get(i).getVorname() + " " + kursListe.get(i).getNachname() + " " + kursListe.get(i).getNote());
 		}
+		drucker.close();
+		// For-Schleife durchläuft gesamte Liste und erstellt in jeder Zeile Matrikelnummer und vollständigen Namen des Studenten
 	}
 		
 	
@@ -146,15 +149,20 @@ public class Notenberechnungssystem {
 		String dateiPfad = Tools.stringEingabe();
 		BufferedReader reader = new BufferedReader(new FileReader(dateiPfad));
 		String zeile = reader.readLine();
+		//Datei wird an angegebenem Dateipfad Zeile für Zeile ausgelesen
 		while(zeile != null) {
 			String array[] = zeile.split(" ");
 			Student tmpStudent = new Student(array[1], array[2], Integer.parseInt(array[0]));
 			tmpStudent.setNote(Double.parseDouble(array[3]));
 			kursListe.add(tmpStudent);
 			zeile = reader.readLine();
+			//Solange es weitere Zeilen gibt, werden diese ausgelesen
+			//Die Zeile wird als String gespeichert und als String-Array an jedem Leerzeichen unterteilt.
+			//Matrikelnummer und Note müssen aus dem String in int- und double-Werte umgewandelt werden.
 		}
 		System.out.println("Datei wurde erfolgreich eingelesen.");
 		reader.close();
+		//Nutzer wird über abschluss benachrichtigt und der FileReader wird geschlossen.
 	}
 
 }

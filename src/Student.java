@@ -1,5 +1,5 @@
 
-public class Student extends Mensch{
+public class Student extends Mensch{ //Klasse erbt alle Attribute und Methoden von der Klasse Mensch
 	private int matrikelnummer;
 	private double note;
 	
